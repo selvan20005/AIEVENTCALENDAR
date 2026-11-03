@@ -136,10 +136,21 @@ export async function run() {
 
   const out = { generatedAt: new Date().toISOString(), window: { from, to }, sources, count: events.length, events };
   if (!DRY) { await mkdir(path.dirname(file), { recursive: true }); await writeFile(file, JSON.stringify(out, null, 1) + '\n'); }
+  if (!DRY) await appendRunLog({ ok: true, count: events.length, added, removed, sources: sources.map(s => `${s.name}:${s.count}`) });
   console.log(`Done: ${events.length} events (+${added} / -${removed})${DRY ? ' [dry run]' : ''}`);
   return { count: events.length, added, removed };
 }
 
+// data/update-log.json — last 26 runs (≈ 6 months of Mondays), shown in Settings → Logs
+async function appendRunLog(entry) {
+  const file = path.join(ROOT, 'data/update-log.json');
+  let log = { runs: [] }; try { log = JSON.parse(await readFile(file, 'utf8')); } catch {}
+  const trigger = { schedule: 'weekly', workflow_dispatch: 'manual run', push: 'push' }[process.env.GITHUB_EVENT_NAME] || process.env.AIEC_TRIGGER || 'manual';
+  log.runs = [...(log.runs || []), { at: new Date().toISOString(), trigger, window: { from, to }, ...entry }].slice(-26);
+  await mkdir(path.dirname(file), { recursive: true });
+  await writeFile(file, JSON.stringify(log, null, 1) + '\n');
+}
+
 if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
-  run().catch(e => { console.error(e); process.exit(1); });
+  run().catch(async e => { console.error(e); if (!DRY) await appendRunLog({ ok: false, error: String(e.message || e).slice(0, 200) }).catch(() => {}); process.exit(1); });
 }

@@ -3,6 +3,12 @@
 All notable changes. Versions follow [SemVer](https://semver.org); each release is a git tag `vX.Y.Z`.
 Weekly data refreshes are committed as `data: weekly AI events refresh …` and don't bump the version.
 
+## v1.2.0 — 2026-11-03
+- **Onboarding journey** on first launch: welcome, event formats + trusted badge, pick interests, timezone & trusted-only, notifications, Face ID / passcode, summary (swipeable, skippable, replay from Settings)
+- **Passcode fallback**: 6-digit passcode (salted SHA-256) when Face ID fails, is cancelled or isn't available; lockout after 5 wrong tries; set / change / remove in Settings
+- **Logs** in Settings: device activity (security, events, sync, settings, errors) with filters, export, clear; plus the weekly feed job's run history
+- **Version history** in Settings, generated from CHANGELOG.md with the current version highlighted
+
 ## v1.1.0 — 2026-11-03
 - Header refresh button: re-pulls the live events feed + app update, toast before and after
 - Pinch-zoom and double-tap zoom disabled (viewport + iOS gesture guard, 16px inputs to stop focus-zoom)

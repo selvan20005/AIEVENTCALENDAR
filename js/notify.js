@@ -4,6 +4,7 @@
 import { load, save } from './store.js';
 import { loadEvents, getEvent } from './data.js';
 import { minsLabel } from './time.js';
+import { log } from './log.js';
 
 let timers = [];
 export const supported = () => 'Notification' in window;
@@ -13,7 +14,9 @@ export const isStandalone = () => matchMedia('(display-mode: standalone)').match
 
 export async function requestPermission() {
   if (!supported()) return 'unsupported';
-  return Notification.requestPermission();
+  const r = await Notification.requestPermission();
+  log('notifications', `Permission: ${r}`, r === 'denied' ? 'warn' : 'info');
+  return r;
 }
 
 export async function notify(title, body, url = 'index.html', tag) {
@@ -45,6 +48,7 @@ export async function rescheduleAll() {
       const fire = () => {
         notify(ev.title, `Starts in ${minsLabel(m)} · ${ev.org || ''}`.trim(), `event.html?id=${encodeURIComponent(id)}`, key);
         const f = load('fired', {}); f[key] = Date.now(); save('fired', f);
+        log('notifications', `Reminder sent \u00b7 ${ev.title}`);
       };
       if (delta <= 0 && delta > -30 * 6e4) { fire(); changed = true; }
       else if (delta > 0 && delta < 2 ** 31 - 1) timers.push(setTimeout(fire, delta));

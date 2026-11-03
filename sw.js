@@ -1,12 +1,12 @@
-// Version: 1.1.0
+// Version: 1.2.0
 // Service worker: offline app shell + notification clicks.
-const VERSION = 'aiec-v1.1.0';
+const VERSION = 'aiec-v1.2.0';
 const SHELL = [
-  './', 'index.html', 'event.html', 'my-events.html', 'settings.html', 'login.html',
+  './', 'index.html', 'onboarding.html', 'event.html', 'my-events.html', 'settings.html', 'login.html',
   'css/base.css', 'manifest.webmanifest', 'assets/icon.svg', 'assets/icon-192.png',
-  'js/version.js', 'js/regions.js', 'js/store.js', 'js/state.js', 'js/time.js', 'js/data.js', 'js/auth.js', 'js/notify.js', 'js/plans.js', 'js/ics.js',
+  'js/version.js', 'js/regions.js', 'js/log.js', 'js/passcode.js', 'js/keypad.js', 'js/store.js', 'js/state.js', 'js/time.js', 'js/data.js', 'js/auth.js', 'js/notify.js', 'js/plans.js', 'js/ics.js',
   'js/icons.js', 'js/components.js', 'js/ui.js', 'js/actions.js', 'js/calendar.js',
-  'js/pages/index.js', 'js/pages/event.js', 'js/pages/my-events.js', 'js/pages/settings.js', 'js/pages/login.js',
+  'js/pages/index.js', 'js/pages/event.js', 'js/pages/my-events.js', 'js/pages/settings.js', 'js/pages/login.js', 'js/pages/onboarding.js',
 ];
 
 self.addEventListener('install', e => {

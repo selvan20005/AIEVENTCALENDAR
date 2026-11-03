@@ -3,6 +3,9 @@ import { brand, prefs } from './state.js';
 import { I } from './icons.js';
 import { esc } from './components.js';
 import { hasPasskey, isUnlocked, lock } from './auth.js';
+import { hasPasscode } from './passcode.js';
+import { log, captureErrors } from './log.js';
+import { getSession, setSession } from './store.js';
 import { rescheduleAll } from './notify.js';
 
 export function applyTheme(theme = prefs().theme) {
@@ -42,7 +45,7 @@ function mountShell(page) {
     <nav class="nav">${NAV.map(([h, k, l]) => `<a href="${h}" class="${k === page ? 'on' : ''}">${l}</a>`).join('')}</nav>
     <div class="hdr-actions">
       <button class="icon-btn" id="refreshBtn" title="Refresh events" aria-label="Refresh events">${I.refresh}</button>
-      ${hasPasskey() ? `<button class="icon-btn" id="lockBtn" title="Lock now" aria-label="Lock">${I.lock}</button>` : ''}
+      ${hasPasskey() || hasPasscode() ? `<button class="icon-btn" id="lockBtn" title="Lock now" aria-label="Lock">${I.lock}</button>` : ''}
     </div>
   </div>`;
   document.body.prepend(header);
@@ -55,7 +58,7 @@ function mountShell(page) {
   foot.innerHTML = `<div class="container" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap"><span><span data-brand="name"></span> — <span data-brand="footer"></span></span><span>Times shown in your timezone · data saved on this device</span></div>`;
   document.querySelector('main')?.after(foot);
   document.getElementById('refreshBtn')?.addEventListener('click', refreshApp);
-  document.getElementById('lockBtn')?.addEventListener('click', () => { lock(); location.href = 'login.html?next=' + encodeURIComponent(location.pathname.split('/').pop() + location.search); });
+  document.getElementById('lockBtn')?.addEventListener('click', () => { lock(); log('security', 'Locked manually'); location.href = 'login.html?next=' + encodeURIComponent(location.pathname.split('/').pop() + location.search); });
 }
 
 // ---------- refresh: pull latest events feed + app files, then reload ----------
@@ -63,6 +66,7 @@ export async function refreshApp() {
   const btn = document.getElementById('refreshBtn');
   btn?.classList.add('spin'); btn && (btn.disabled = true);
   toast(`${I.refresh}<span>Refreshing events\u2026</span>`, 1500);
+  log('sync', 'Manual refresh');
   try {
     const res = await fetch('data/events.json', { cache: 'reload' });
     const count = res.ok ? ((await res.json()).events || []).length : null;
@@ -72,7 +76,9 @@ export async function refreshApp() {
     const reg = 'serviceWorker' in navigator ? await navigator.serviceWorker.getRegistration() : null;
     await reg?.update().catch(() => {});
     try { sessionStorage.setItem('aiec_refreshed', count == null ? 'offline' : String(count)); } catch {}
+    log('sync', count == null ? 'Refresh failed \u2014 offline' : `Feed reloaded \u00b7 ${count} live events`, count == null ? 'warn' : 'info');
   } catch {
+    log('sync', 'Refresh failed \u2014 offline', 'warn');
     try { sessionStorage.setItem('aiec_refreshed', 'offline'); } catch {}
   }
   location.reload();
@@ -126,12 +132,20 @@ export function openSheet(html, { onClose } = {}) {
 export function boot(page) {
   applyTheme();
   disableZoom();
+  captureErrors();
   const p = prefs();
-  if (page !== 'login' && p.requireAuth && hasPasskey() && !isUnlocked()) {
-    location.replace('login.html?next=' + encodeURIComponent(location.pathname.split('/').pop() + location.search));
+  const here = encodeURIComponent(location.pathname.split('/').pop() + location.search);
+  const gated = page !== 'login' && page !== 'onboarding';
+  if (gated && p.requireAuth && (hasPasskey() || hasPasscode()) && !isUnlocked()) {
+    location.replace('login.html?next=' + here);
     return false;
   }
-  if (page !== 'login') mountShell(page);
+  if (gated && !p.onboarded) {
+    location.replace('onboarding.html?next=' + here);
+    return false;
+  }
+  if (gated && getSession('opened') !== '1') { setSession('opened', '1'); log('app', `App opened \u00b7 ${page}`); }
+  if (gated) mountShell(page);
   applyBrand();
   matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => applyBrand());
 
@@ -142,7 +156,7 @@ export function boot(page) {
     const { title, body, url } = e.detail;
     toast(`${I.bell}<span><b style="font-weight:500">${esc(title)}</b> — ${esc(body)}</span> <a href="${esc(url)}">Open</a>`, 6000);
   });
-  if (page !== 'login') rescheduleAll();
+  if (gated) rescheduleAll();
   try {
     const r = sessionStorage.getItem('aiec_refreshed');
     if (r) {

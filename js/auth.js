@@ -2,6 +2,7 @@
 // NOTE: prototype — no server verifies the signature; this is a device-local privacy lock.
 import { load, save, setSession, getSession, clearSession } from './store.js';
 import { brand, setPrefs } from './state.js';
+import { log } from './log.js';
 
 const b64u = {
   enc: buf => btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''),
@@ -44,6 +45,7 @@ export async function register(displayName = 'Me') {
   });
   save('auth', { id: b64u.enc(cred.rawId), created: Date.now(), name: displayName });
   markUnlocked();
+  log('security', `${biometricLabel()} passkey created`);
   return true;
 }
 
@@ -54,11 +56,12 @@ export async function unlock() {
   const res = await navigator.credentials.get({ publicKey });
   if (a.id && b64u.enc(res.rawId) !== a.id) throw new Error('That passkey belongs to a different account.');
   markUnlocked();
+  log('security', `Unlocked with ${biometricLabel()}`);
   return true;
 }
 
 export function removePasskey() {
   save('auth', { id: null, created: null, name: null });
-  setPrefs({ requireAuth: false });
   lock();
+  log('security', 'Passkey removed');
 }

@@ -2,6 +2,7 @@
 import { load, save } from './store.js';
 import { prefs } from './state.js';
 import { rescheduleAll } from './notify.js';
+import { log } from './log.js';
 
 // { [eventId]: { s: 'going'|'maybe', r: [minutes...], t: savedAt } }
 export const allPlans = () => load('plans', {});
@@ -14,6 +15,7 @@ export function setStatus(id, s, defaultReminder = prefs().defaultReminder) {
   if (!s) delete p[id];
   else p[id] = { r: [defaultReminder], ...(p[id] || {}), s, t: Date.now() };
   commit(p);
+  log('plans', `${s === 'going' ? 'Attending' : s === 'maybe' ? 'Interested in' : 'Removed'} ${id}`);
   return p[id] || null;
 }
 
@@ -23,5 +25,6 @@ export function toggleReminder(id, mins) {
   cur.r = cur.r.includes(mins) ? cur.r.filter(x => x !== mins) : [...cur.r, mins].sort((a, b) => a - b);
   p[id] = cur;
   commit(p);
+  log('plans', `Reminder ${cur.r.includes(mins) ? 'set' : 'removed'} \u00b7 ${mins} min \u00b7 ${id}`);
   return cur;
 }

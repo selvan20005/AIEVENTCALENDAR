@@ -27,12 +27,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/update-events.mjs --days 92 | tee update.log
+      - name: Record failure in run log
+        if: failure()
+        run: |
+          git add data/ && git -c user.name=aiec-bot -c user.email=41898282+github-actions[bot]@users.noreply.github.com commit -m "data: weekly refresh failed $(date -u +%F)" && git push || true
       - name: Commit if changed
         run: |
-          if git diff --quiet -- data/events.json; then echo "No changes"; exit 0; fi
+          if git diff --quiet -- data/; then echo "No changes"; exit 0; fi
           git config user.name  "aiec-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           SUMMARY=$(tail -1 update.log)
-          git add data/events.json
+          git add data/
           git commit -m "data: weekly AI events refresh $(date -u +%F) — ${SUMMARY}"
           git push

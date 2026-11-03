@@ -1,4 +1,4 @@
-<!-- Version: 1.1.0 -->
+<!-- Version: 1.2.0 -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,7 +24,7 @@
     <div class="settings">
       <nav>
         <a href="#branding">Branding</a><a href="#appearance">Appearance</a><a href="#calendar">Calendar</a>
-        <a href="#notifications">Notifications</a><a href="#security">Face ID & security</a><a href="#data">Data</a><a href="#about">About</a>
+        <a href="#notifications">Notifications</a><a href="#security">Face ID & passcode</a><a href="#data">Data</a><a href="#logs">Logs</a><a href="#versions">Version history</a><a href="#about">About</a>
       </nav>
       <div>
         <!-- Branding / white-label -->
@@ -78,6 +78,9 @@
           <p class="muted" style="margin:0" id="pkStatus"></p>
           <div class="line-item"><div>Require <span class="bio"></span> to open<p>Locks the app each new session.</p></div><label class="switch"><input type="checkbox" id="pkRequire"><span></span></label></div>
           <div class="actions"><button class="btn primary" id="pkSetup"></button><button class="btn ghost hidden" id="pkRemove">Remove passkey</button></div>
+          <div class="line-item"><div>Passcode<p id="pinStatus"></p></div>
+            <div class="actions"><button class="btn" id="pinSet"></button><button class="btn ghost" id="pinRemove" hidden>Remove</button></div></div>
+          <div id="pinPadWrap" class="card" hidden style="display:flex;flex-direction:column;align-items:center"><div id="pinPad"></div><button class="btn ghost sm" id="pinCancel" style="margin-top:10px">Cancel</button></div>
         </section>
 
         <!-- Data -->
@@ -87,9 +90,26 @@
           <div class="actions"><button class="btn" id="dExport">Export JSON</button><label class="btn">Import JSON<input type="file" id="dImport" accept="application/json" hidden></label><button class="btn ghost" id="dReset" style="color:var(--live)">Erase everything</button></div>
         </section>
 
+        <!-- Logs -->
+        <section class="set" id="logs">
+          <div class="line-item"><div><h2 class="h2">Logs</h2><p>Activity on this device (last 60 entries) and the weekly event-feed job.</p></div></div>
+          <div class="seg" id="logSeg"><button data-f="all" class="on">All</button><button data-f="security">Security</button><button data-f="plans">Events</button><button data-f="sync">Sync</button><button data-f="issues">Warnings</button></div>
+          <div class="log-list" id="logList"></div>
+          <div class="actions"><button class="btn sm" id="logExport">Export logs</button><button class="btn ghost sm" id="logClear">Clear</button></div>
+          <h3 class="h3" style="margin-top:6px">Weekly feed updates <span class="muted" style="font-weight:300">· Mondays 6:00 PM IST</span></h3>
+          <div class="log-list" id="jobList"></div>
+        </section>
+
+        <!-- Version history -->
+        <section class="set" id="versions">
+          <div class="line-item"><div><h2 class="h2">Version history</h2><p id="verNow"></p></div></div>
+          <div id="verList"></div>
+        </section>
+
         <section class="set" id="about">
           <h2 class="h2">About</h2>
           <p class="muted" style="margin:0" id="aboutInfo"></p>
+          <div class="actions"><a class="btn" href="onboarding.html?next=settings.html">Replay onboarding</a></div>
         </section>
       </div>
     </div>

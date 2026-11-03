@@ -1,4 +1,4 @@
-<!-- Version: 1.1.0 -->
+<!-- Version: 1.2.0 -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -19,15 +19,22 @@
 </head>
 <body data-page="login" data-title="Unlock">
 <main class="lock">
-  <div style="max-width:360px">
+  <div style="max-width:360px;width:100%">
     <div class="mark" data-brand="mark"></div>
     <div class="eyebrow" data-brand="tagline"></div>
     <h1 class="display" style="font-size:40px" data-brand="name"></h1>
-    <p class="muted" id="msg">Locked</p>
-    <button class="faceid" id="faceBtn" aria-label="Unlock"></button>
-    <div class="muted" style="font-size:13px" id="hint"></div>
-    <div style="margin-top:28px;display:flex;flex-direction:column;gap:8px;align-items:center">
-      <button class="btn ghost sm hidden" id="skip">Continue without passkey</button>
+    <div id="bioView">
+      <p class="muted" id="msg">Locked</p>
+      <button class="faceid" id="faceBtn" aria-label="Unlock"></button>
+      <div class="muted" style="font-size:13px" id="hint"></div>
+      <div style="margin-top:28px;display:flex;flex-direction:column;gap:8px;align-items:center">
+        <button class="btn ghost sm" id="usePin" hidden>Use passcode</button>
+        <button class="btn ghost sm" id="skip" hidden>Continue without lock</button>
+      </div>
+    </div>
+    <div id="pinView" hidden>
+      <div id="pinPad"></div>
+      <button class="btn ghost sm" id="useBio" style="margin-top:14px" hidden>Use Face ID instead</button>
     </div>
   </div>
 </main>

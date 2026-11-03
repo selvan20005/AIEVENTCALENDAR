@@ -16,7 +16,8 @@ await edit('sw.js', s => s.replace(/aiec-v[\d.]+/, `aiec-v${next}`));
 await edit('package.json', s => s.replace(/"version": "[\d.]+"/, `"version": "${next}"`));
 await edit('CHANGELOG.md', s => s.replace('\n## v', `\n## v${next} — ${new Date().toISOString().slice(0, 10)}\n${(notes.length ? notes : ['Maintenance']).map(n => `- ${n}`).join('\n')}\n\n## v`));
 // keep the "Version: x.y.z" header comments in pages / modules in sync
-for (const f of ['index.html', 'event.html', 'my-events.html', 'settings.html', 'login.html', 'js/version.js', 'sw.js']) {
+const { readdir } = await import('node:fs/promises');
+for (const f of [...(await readdir('.')).filter(n => n.endsWith('.html')), 'js/version.js', 'sw.js']) {
   await edit(f, s => s.replace(/Version: [\d.]+/, `Version: ${next}`));
 }
 console.log(`${cur} → ${next}`);

@@ -1,0 +1,19 @@
+{
+ "runs": [
+  {
+   "at": "2026-11-03T18:10:37.453Z",
+   "trigger": "manual",
+   "window": {
+    "from": "2026-11-03",
+    "to": "2027-02-03"
+   },
+   "ok": true,
+   "count": 14,
+   "added": 0,
+   "removed": 0,
+   "sources": [
+    "confs.tech:18"
+   ]
+  }
+ ]
+}

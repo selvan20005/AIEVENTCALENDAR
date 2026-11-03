@@ -26,6 +26,8 @@ export const DEFAULT_PREFS = {
   defaultReminder: 60,      // minutes
   requireAuth: false,       // Face ID / passkey on open
   notifications: false,
+  onboarded: false,         // first-launch journey done
+  interests: [],            // topics picked during onboarding
 };
 
 export const brand = () => load('brand', DEFAULT_BRAND);
