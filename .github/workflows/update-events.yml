@@ -1,0 +1,38 @@
+name: Weekly AI events refresh
+
+on:
+  schedule:
+    # Every Monday 18:00 IST (Asia/Kolkata) = 12:30 UTC
+    - cron: '30 12 * * 1'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-events
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci || npm install
+      - name: Fetch next 3 months of AI events
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/update-events.mjs --days 92 | tee update.log
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- data/events.json; then echo "No changes"; exit 0; fi
+          git config user.name  "aiec-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          SUMMARY=$(tail -1 update.log)
+          git add data/events.json
+          git commit -m "data: weekly AI events refresh $(date -u +%F) — ${SUMMARY}"
+          git push
