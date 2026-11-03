@@ -1,0 +1,48 @@
+<!-- Version: 1.0.0 -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fafaf9">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Aether">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<title>My events</title>
+</head>
+<body data-page="mine" data-title="My events">
+<main>
+  <div class="container">
+    <section style="padding:40px 0 8px;display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap">
+      <div>
+        <div class="eyebrow">Your plan</div>
+        <h1 class="display">My events</h1>
+        <div class="stats">
+          <div class="stat"><b id="sGoing">0</b><span>going</span></div>
+          <div class="stat"><b id="sMaybe">0</b><span>interested</span></div>
+          <div class="stat"><b id="sRem">0</b><span>reminders set</span></div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn" id="exportAll"></button>
+      </div>
+    </section>
+    <div id="notifBanner"></div>
+    <div class="tabs" id="tabs">
+      <button data-t="going" class="on">Going</button>
+      <button data-t="maybe">Interested</button>
+      <button data-t="past">Past</button>
+    </div>
+    <div id="list"></div>
+  </div>
+</main>
+<script type="module" src="js/pages/my-events.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "Aether — AI Event Calendar",
+  "short_name": "Aether",
+  "description": "Every AI event across the globe — virtual, on-demand, hybrid and in person.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fafaf9",
+  "theme_color": "#fafaf9",
+  "icons": [
+    { "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

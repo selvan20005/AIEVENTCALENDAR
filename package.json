@@ -1,0 +1,19 @@
+{
+  "name": "ai-event-calendar",
+  "version": "1.0.0",
+  "private": true,
+  "description": "White-label AI event calendar PWA with weekly open-data refresh.",
+  "type": "module",
+  "scripts": {
+    "start": "npx --yes serve -l 5173 .",
+    "update-events": "node scripts/update-events.mjs",
+    "scheduler": "node scripts/scheduler.mjs",
+    "release": "node scripts/release.mjs"
+  },
+  "dependencies": {
+    "node-cron": "^3.0.3",
+    "node-ical": "^0.20.1"
+  },
+  "engines": { "node": ">=20" },
+  "license": "MIT"
+}

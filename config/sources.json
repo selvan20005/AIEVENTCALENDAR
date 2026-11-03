@@ -1,0 +1,15 @@
+{
+  "_help": "Weekly updater sources. confsTech = open, PR-reviewed conference dataset (trusted). Add any public .ics feed (Luma, Meetup, university/lab calendars) under icalFeeds. trusted:true shows it under 'Trusted only'. aiOnly:false keeps every event in the feed.",
+  "confsTech": true,
+  "icalFeeds": [
+    {
+      "name": "Example Luma calendar",
+      "url": "https://api.lu.ma/ics/get?entity=calendar&id=REPLACE_ME",
+      "homepage": "https://lu.ma/",
+      "org": "Example org",
+      "trusted": false,
+      "aiOnly": true,
+      "disabled": true
+    }
+  ]
+}

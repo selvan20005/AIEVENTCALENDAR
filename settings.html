@@ -1,0 +1,100 @@
+<!-- Version: 1.0.0 -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fafaf9">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Aether">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<title>Settings</title>
+</head>
+<body data-page="settings" data-title="Settings">
+<main>
+  <div class="container">
+    <section style="padding:40px 0 0"><div class="eyebrow">Preferences</div><h1 class="display">Settings</h1></section>
+    <div class="settings">
+      <nav>
+        <a href="#branding">Branding</a><a href="#appearance">Appearance</a><a href="#calendar">Calendar</a>
+        <a href="#notifications">Notifications</a><a href="#security">Face ID & security</a><a href="#data">Data</a><a href="#about">About</a>
+      </nav>
+      <div>
+        <!-- Branding / white-label -->
+        <section class="set" id="branding">
+          <div><h2 class="h2">White-label branding</h2><p class="muted" style="margin:6px 0 0">Rename and recolour the whole app. Saved in cookies on this device.</p></div>
+          <div class="preview"><span class="mark" data-brand="mark" style="width:40px;height:40px;border-radius:12px;font-size:17px"></span>
+            <div><div style="font-weight:400" data-brand="name"></div><div class="muted" style="font-size:13px" data-brand="tagline"></div></div>
+            <button class="btn sm accent" style="margin-left:auto">Accent</button></div>
+          <div class="row2">
+            <div class="field"><label for="bName">App name</label><input class="input" id="bName" maxlength="32"></div>
+            <div class="field"><label for="bTag">Tagline</label><input class="input" id="bTag" maxlength="60"></div>
+            <div class="field"><label for="bMark">Logo mark (1–2 characters)</label><input class="input" id="bMark" maxlength="2"></div>
+            <div class="field"><label for="bLogo">Logo image URL (optional)</label><input class="input" id="bLogo" placeholder="https://…/logo.png"></div>
+            <div class="field" style="grid-column:1/-1"><label for="bFooter">Footer line</label><input class="input" id="bFooter" maxlength="80"></div>
+          </div>
+          <div class="field"><label>Accent colour</label><div class="swatches" id="swatches"></div></div>
+          <div class="actions"><button class="btn" id="bExport">Export brand config</button><button class="btn ghost" id="bReset">Reset to default</button></div>
+        </section>
+
+        <!-- Appearance -->
+        <section class="set" id="appearance">
+          <h2 class="h2">Appearance</h2>
+          <div class="line-item"><div>Theme<p>Follow the system or force light / dark.</p></div>
+            <div class="seg" id="themeSeg"><button data-v="auto">Auto</button><button data-v="light">Light</button><button data-v="dark">Dark</button></div></div>
+        </section>
+
+        <!-- Calendar -->
+        <section class="set" id="calendar">
+          <h2 class="h2">Calendar</h2>
+          <div class="row2">
+            <div class="field"><label for="pTz">Timezone</label><select class="input" id="pTz"></select></div>
+            <div class="field"><label for="pView">Default view</label><select class="input" id="pView"><option value="month">Month</option><option value="week">Week</option><option value="agenda">Agenda</option></select></div>
+            <div class="field"><label for="pH12">Clock</label><select class="input" id="pH12"><option value="auto">Automatic</option><option value="12">12-hour</option><option value="24">24-hour</option></select></div>
+            <div class="field"><label for="pRem">Default reminder</label><select class="input" id="pRem"><option value="10">10 min before</option><option value="30">30 min before</option><option value="60">1 hour before</option><option value="1440">1 day before</option></select></div>
+          </div>
+          <div class="line-item"><div>Trusted events only<p>Hide community listings that aren't from reviewed sources.</p></div><label class="switch"><input type="checkbox" id="pTrusted"><span></span></label></div>
+          <div class="line-item"><div>Show sample events<p>Recurring demo sessions that fill the calendar between live-feed events.</p></div><label class="switch"><input type="checkbox" id="pSamples"><span></span></label></div>
+        </section>
+
+        <!-- Notifications -->
+        <section class="set" id="notifications">
+          <h2 class="h2">Notifications</h2>
+          <div class="line-item"><div>Push notifications<p id="nStatus"></p></div><button class="btn" id="nEnable">Enable</button></div>
+          <div class="line-item"><div>Send a test<p>Checks that reminders can reach this device.</p></div><button class="btn" id="nTest">Test</button></div>
+          <div class="banner hidden" id="iosHint"></div>
+        </section>
+
+        <!-- Security -->
+        <section class="set" id="security">
+          <h2 class="h2">Face ID & passkey</h2>
+          <p class="muted" style="margin:0" id="pkStatus"></p>
+          <div class="line-item"><div>Require <span class="bio"></span> to open<p>Locks the app each new session.</p></div><label class="switch"><input type="checkbox" id="pkRequire"><span></span></label></div>
+          <div class="actions"><button class="btn primary" id="pkSetup"></button><button class="btn ghost hidden" id="pkRemove">Remove passkey</button></div>
+        </section>
+
+        <!-- Data -->
+        <section class="set" id="data">
+          <h2 class="h2">Your data</h2>
+          <p class="muted" style="margin:0" id="dataInfo"></p>
+          <div class="actions"><button class="btn" id="dExport">Export JSON</button><label class="btn">Import JSON<input type="file" id="dImport" accept="application/json" hidden></label><button class="btn ghost" id="dReset" style="color:var(--live)">Erase everything</button></div>
+        </section>
+
+        <section class="set" id="about">
+          <h2 class="h2">About</h2>
+          <p class="muted" style="margin:0" id="aboutInfo"></p>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
+<script type="module" src="js/pages/settings.js"></script>
+</body>
+</html>

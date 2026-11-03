@@ -1,0 +1,74 @@
+<!-- Version: 1.0.0 -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fafaf9">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Aether">
+<meta name="description" content="Every AI event across the globe — virtual, on-demand, hybrid and in person — in one calendar.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<title>AI Event Calendar</title>
+</head>
+<body data-page="calendar">
+<main>
+  <div class="container">
+    <!-- Today across the globe -->
+    <section class="hero">
+      <div>
+        <div class="eyebrow" id="todayEyebrow">Today</div>
+        <h1 class="display" id="todayTitle">&nbsp;</h1>
+        <div class="stats">
+          <div class="stat"><b id="statToday">–</b><span>AI events today</span></div>
+          <div class="stat"><b id="statLive">–</b><span>live now</span></div>
+          <div class="stat"><b id="statOnline">–</b><span>online / on-demand</span></div>
+          <div class="stat"><b id="statWeek">–</b><span>next 7 days</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="eyebrow">Today across the globe</div>
+        <div class="regions" id="regionChips"></div>
+      </div>
+    </section>
+
+    <section>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin:18px 0 10px">
+        <h2 class="h3" id="stripTitle">Live & up next</h2>
+        <span class="muted" style="font-size:12px" id="feedInfo"></span>
+      </div>
+      <div class="strip" id="strip"></div>
+    </section>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <button class="icon-btn" id="prev" aria-label="Previous"></button>
+      <button class="btn sm" id="todayBtn">Today</button>
+      <button class="icon-btn" id="next" aria-label="Next"></button>
+      <div class="title" id="calTitle"></div>
+      <div class="search"><span id="searchIcon"></span><input class="input" id="q" type="search" placeholder="Search events, hosts, cities…  ( / )" autocomplete="off"></div>
+      <div class="spacer"></div>
+      <label class="toggle-row" title="Only show events from verified, trusted sources">
+        <span class="switch"><input type="checkbox" id="trusted"><span></span></span>Trusted only
+      </label>
+      <button class="btn sm" id="filterBtn"></button>
+      <div class="seg" id="viewSeg">
+        <button data-v="month">Month</button><button data-v="week">Week</button><button data-v="agenda">Agenda</button>
+      </div>
+    </div>
+    <div class="filters-row" id="formatChips"></div>
+
+    <div id="cal"></div>
+  </div>
+</main>
+<script type="module" src="js/pages/index.js"></script>
+</body>
+</html>

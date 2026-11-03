@@ -1,0 +1,316 @@
+{
+ "generatedAt": "2026-11-03T17:26:24.541Z",
+ "window": {
+  "from": "2026-11-03",
+  "to": "2027-02-03"
+ },
+ "sources": [
+  {
+   "name": "confs.tech",
+   "url": "https://github.com/tech-conferences/conference-data",
+   "count": 18,
+   "trusted": true
+  }
+ ],
+ "count": 14,
+ "events": [
+  {
+   "id": "c-ae20b1a796",
+   "title": "AI DevCon NYC",
+   "url": "https://tessl.io/devcon",
+   "org": "tessl.io",
+   "startDate": "2026-11-02",
+   "endDate": "2026-11-04",
+   "format": "hybrid",
+   "city": "Brooklyn, NY",
+   "country": "U.S.A.",
+   "region": "Americas",
+   "topics": [
+    "ml"
+   ],
+   "trusted": true,
+   "source": "confs.tech",
+   "cfpUrl": "https://sessionize.com/ai-native-devcon-nyc-2026",
+   "cfpEndDate": "2026-10-01",
+   "price": "unknown",
+   "desc": "AI DevCon NYC — Brooklyn, NY, U.S.A. and online. Listed on the community-reviewed confs.tech dataset."
+  },
+  {
+   "id": "c-bf3e1aac9d",
+   "title": "The AI Conf",
+   "url": "https://theconf.ai",
+   "org": "theconf.ai",
+   "startDate": "2026-11-03",
+   "endDate": "2026-11-04",
+   "format": "in-person",
+   "city": "Barcelona",
+   "country": "Spain",
+   "region": "Europe",
+   "topics": [
+    "ml"
+   ],
+   "trusted": true,
+   "source": "confs.tech",
+   "cfpUrl": "https://theconf.ai/call-for-papers",
+   "cfpEndDate": "2026-09-30",
+   "price": "unknown",
+   "desc": "The AI Conf — Barcelona, Spain. Listed on the community-reviewed confs.tech dataset."
+  },
+  {
+   "id": "c-843e53222c",
+   "title": "VIC AI Boom",
+   "url": "https://vicaiboom.com",
+   "org": "vicaiboom.com",
+   "startDate": "2026-11-13",
+   "endDate": "2026-11-13",
+   "format": "in-person",
+   "city": "Melbourne",
+   "country": "Australia",
+   "region": "Asia-Pacific",
+   "topics": [
+    "ml"
+   ],
+   "trusted": true,
+   "source": "confs.tech",
+   "cfpUrl": "https://forms.gle/gRGNcMAqbwxPaYpC6",
+   "cfpEndDate": "2026-10-16",
+   "price": "unknown",
+   "desc": "VIC AI Boom — Melbourne, Australia. Listed on the community-reviewed confs.tech dataset."
+  },
+  {
+   "id": "c-a42edb6d57",
+   "title": "AI Engineering Summit",
+   "url": "https://ai-engineering-summit.de",
+   "org": "ai-engineering-summit.de",
+   "startDate": "2026-11-16",
+   "endDate": "2026-11-20",
+   "format": "in-person",
+   "city": "Berlin",
+   "country": "Germany",
+   "region": "Europe",
+   "topics": [
+    "coding",
+    "business"
+   ],
+   "trusted": true,
+   "source": "confs.tech",
+   "cfpUrl": "",
+   "cfpEndDate": "",
+   "price": "unknown",
+   "desc": "AI Engineering Summit — Berlin, Germany. Listed on the community-reviewed confs.tech dataset."
+  },
+  {
+   "id": "c-d10b8bf5f2",
+   "title": "MLCon Berlin",
+   "url": "https://mlconference.ai/berlin",
+   "org": "mlconference.ai",
+   "startDate": "2026-11-16",
+   "endDate": "2026-11-20",
+   "format": "hybrid",
+   "city": "Berlin",
+   "country": "Germany",
+   "region": "Europe",
+   "topics": [
+    "ml"
+   ],
+   "trusted": true,
+   "source": "confs.tech",
+   "cfpUrl": "",
+   "cfpEndDate": "",
+   "price": "unknown",
+   "desc": "MLCon Berlin — Berlin, Germany and online. Listed on the community-reviewed confs.tech dataset."
+  },
+  {
+   "id": "c-a2bff07fe6",
+   "title": "NextGen Intelligence Conference: Data, Cloud & AI",
+   "url": "https://techaiconf.com",
+   "org": "techaiconf.com",
+   "startDate": "2026-11-16",
+   "endDate": "2026-11-17",
+   "format": "hybrid",
+   "city": "London",
+   "country": "U.K.",
+   "region": "Europe",
+   "topics": [
+    "data"
+   ],
+   "trusted": true,
+   "source": "confs.tech",
+   "cfpUrl": "https://techaiconf.com/register-interest",
+   "cfpEndDate": "2026-10-09",
+   "price": "unknown",
+   "desc": "NextGen Intelligence Conference: Data, Cloud & AI — London, U.K. and online. Listed on the community-reviewed confs.tech dataset."
+  },
+  {
+   "id": "c-8834c96f37",
+   "title": "AI Coding Summit New York Edition",
+   "url": "https://aicodingsummit.com/nyc",
+   "org": "aicodingsummit.com",
+   "startDate": "2026-11-16",
+   "endDate": "2026-11-19",
+   "format": "in-person",
+   "city": "New York, NY",
+   "country": "U.S.A.",
+   "region": "Americas",
+   "topics": [
+    "coding",
+    "business"
+   ],
+   "trusted": true,
+   "source": "confs.tech",
+   "cfpUrl": "https://gitnation.com/events/ai-coding-summit-nyc/cfp",
+   "cfpEndDate": "2026-07-09",
+   "price": "unknown",
+   "desc": "AI Coding Summit New York Edition — New York, NY, U.S.A.. Listed on the community-reviewed confs.tech dataset."
+  },
+  {
+   "id": "c-c9b4d3056a",
+   "title": "Agentic Engineering Days Zurich",
+   "url": "https://www.agenticdays.com",
+   "org": "agenticdays.com",
+   "startDate": "2026-11-20",
+   "endDate": "2026-11-20",
+   "format": "in-person",
+   "city": "Zurich",
+   "country": "Switzerland",
+   "region": "Europe",
+   "topics": [
+    "agents",
+    "coding"
+   ],
+   "trusted": true,
+   "source": "confs.tech",
+   "cfpUrl": "https://sessionize.com/agentic-engineering-days-zurich-2026",
+   "cfpEndDate": "2026-07-23",
+   "price": "unknown",
+   "desc": "Agentic Engineering Days Zurich — Zurich, Switzerland. Listed on the community-reviewed confs.tech dataset."
+  },
+  {
+   "id": "c-ea447b3755",
+   "title": "AI World Congress",
+   "url": "https://aiconference.london",
+   "org": "aiconference.london",
+   "startDate": "2026-11-25",
+   "endDate": "2026-11-26",
+   "format": "in-person",
+   "city": "London",
+   "country": "U.K.",
+   "region": "Europe",
+   "topics": [
+    "ml"
+   ],
+   "trusted": true,
+   "source": "confs.tech",
+   "cfpUrl": "",
+   "cfpEndDate": "",
+   "price": "unknown",
+   "desc": "AI World Congress — London, U.K.. Listed on the community-reviewed confs.tech dataset."
+  },
+  {
+   "id": "c-348d5eb9bf",
+   "title": "AI Coding Summit Berlin Edition",
+   "url": "https://aicodingsummit.com/berlin",
+   "org": "aicodingsummit.com",
+   "startDate": "2026-12-04",
+   "endDate": "2026-12-07",
+   "format": "in-person",
+   "city": "Berlin",
+   "country": "Germany",
+   "region": "Europe",
+   "topics": [
+    "coding",
+    "business"
+   ],
+   "trusted": true,
+   "source": "confs.tech",
+   "cfpUrl": "https://gitnation.com/events/ai-coding-summit-berlin/cfp",
+   "cfpEndDate": "2026-08-12",
+   "price": "unknown",
+   "desc": "AI Coding Summit Berlin Edition — Berlin, Germany. Listed on the community-reviewed confs.tech dataset."
+  },
+  {
+   "id": "c-c69972db19",
+   "title": "Great International AI Native Summit (GAINS)",
+   "url": "https://ainativesummit.com",
+   "org": "ainativesummit.com",
+   "startDate": "2026-12-09",
+   "endDate": "2026-12-10",
+   "format": "in-person",
+   "city": "Bangalore",
+   "country": "India",
+   "region": "Asia-Pacific",
+   "topics": [
+    "business"
+   ],
+   "trusted": true,
+   "source": "confs.tech",
+   "cfpUrl": "https://ainativesummit.com/cfp",
+   "cfpEndDate": "2026-07-15",
+   "price": "unknown",
+   "desc": "Great International AI Native Summit (GAINS) — Bangalore, India. Listed on the community-reviewed confs.tech dataset."
+  },
+  {
+   "id": "c-d21c806e48",
+   "title": "AI for Developers",
+   "url": "https://aiconference.dev",
+   "org": "aiconference.dev",
+   "startDate": "2026-12-17",
+   "endDate": "2026-12-18",
+   "format": "virtual",
+   "city": "",
+   "country": "",
+   "region": "Global",
+   "topics": [
+    "coding"
+   ],
+   "trusted": true,
+   "source": "confs.tech",
+   "cfpUrl": "https://aiconference.dev/cfp",
+   "cfpEndDate": "2026-06-01",
+   "price": "unknown",
+   "desc": "AI for Developers — online. Listed on the community-reviewed confs.tech dataset."
+  },
+  {
+   "id": "c-6798f76c97",
+   "title": "AI Conf Asia",
+   "url": "https://aiconf.asia",
+   "org": "aiconf.asia",
+   "startDate": "2027-01-09",
+   "endDate": "2027-01-10",
+   "format": "in-person",
+   "city": "Kathmandu",
+   "country": "Nepal",
+   "region": "Asia-Pacific",
+   "topics": [
+    "ml"
+   ],
+   "trusted": true,
+   "source": "confs.tech",
+   "cfpUrl": "https://aiconf.asia/2027/#cfs",
+   "cfpEndDate": "2026-11-01",
+   "price": "unknown",
+   "desc": "AI Conf Asia — Kathmandu, Nepal. Listed on the community-reviewed confs.tech dataset."
+  },
+  {
+   "id": "c-bfaa56ff09",
+   "title": "3rd International Conference on Artificial Intelligence and Data Science",
+   "url": "https://datascience.averconferences.com",
+   "org": "datascience.averconferences.com",
+   "startDate": "2027-02-01",
+   "endDate": "2027-02-03",
+   "format": "in-person",
+   "city": "Dubai",
+   "country": "United Arab Emirates",
+   "region": "Middle East & Africa",
+   "topics": [
+    "data"
+   ],
+   "trusted": true,
+   "source": "confs.tech",
+   "cfpUrl": "https://datascience.averconferences.com/abstract.php",
+   "cfpEndDate": "2027-01-18",
+   "price": "unknown",
+   "desc": "3rd International Conference on Artificial Intelligence and Data Science — Dubai, United Arab Emirates. Listed on the community-reviewed confs.tech dataset."
+  }
+ ]
+}
