@@ -1,6 +1,6 @@
-// Version: 1.0.0
+// Version: 1.1.0
 // Service worker: offline app shell + notification clicks.
-const VERSION = 'aiec-v1.0.0';
+const VERSION = 'aiec-v1.1.0';
 const SHELL = [
   './', 'index.html', 'event.html', 'my-events.html', 'settings.html', 'login.html',
   'css/base.css', 'manifest.webmanifest', 'assets/icon.svg', 'assets/icon-192.png',

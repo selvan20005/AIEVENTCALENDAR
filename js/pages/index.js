@@ -76,8 +76,15 @@ async function init() {
   const redraw = () => { hero(); draw(); };
 
   // ---------- events ----------
-  $('prev').onclick = () => { st.cursor = shift(st.view, st.cursor, -1); if (st.view !== 'month') st.selected = st.cursor; draw(); };
-  $('next').onclick = () => { st.cursor = shift(st.view, st.cursor, 1); if (st.view !== 'month') st.selected = st.cursor; draw(); };
+  const go = dir => {
+    st.cursor = shift(st.view, st.cursor, dir);
+    if (st.view !== 'month') st.selected = st.cursor;
+    draw();
+    const c = $('cal'); c.classList.remove('enter-l', 'enter-r'); void c.offsetWidth; c.classList.add(dir > 0 ? 'enter-l' : 'enter-r');
+  };
+  $('prev').onclick = () => go(-1);
+  $('next').onclick = () => go(1);
+  bindSwipe($('cal'), go);
   $('todayBtn').onclick = () => { st.cursor = st.selected = today; draw(); };
   $('viewSeg').onclick = e => { const v = e.target.dataset.v; if (!v) return; st.view = v; setPrefs({ view: v }); draw(); };
   $('trusted').onchange = e => { setPrefs({ trustedOnly: e.target.checked }); redraw(); };
@@ -129,6 +136,44 @@ async function init() {
   redraw();
   if (params.get('id')) pick(params.get('id'));
   setInterval(hero, 60_000);
+}
+
+// Horizontal swipe on the calendar: follow the finger, then snap to prev/next.
+function bindSwipe(el, go) {
+  let x0 = 0, y0 = 0, dx = 0, lock = null, active = false;
+  el.addEventListener('touchstart', e => {
+    if (e.touches.length !== 1) return;
+    active = true; lock = null; dx = 0;
+    x0 = e.touches[0].clientX; y0 = e.touches[0].clientY;
+    el.classList.remove('snap', 'enter-l', 'enter-r');
+  }, { passive: true });
+  el.addEventListener('touchmove', e => {
+    if (!active || e.touches.length !== 1) return;
+    const mx = e.touches[0].clientX - x0, my = e.touches[0].clientY - y0;
+    if (!lock && (Math.abs(mx) > 8 || Math.abs(my) > 8)) lock = Math.abs(mx) > Math.abs(my) * 1.2 ? 'x' : 'y';
+    if (lock !== 'x') return;
+    e.preventDefault();
+    dx = mx;
+    el.classList.add('dragging');
+    el.style.transform = `translateX(${dx * 0.6}px)`;
+    el.style.opacity = String(1 - Math.min(Math.abs(dx) / 600, 0.35));
+  }, { passive: false });
+  const end = () => {
+    if (!active) return;
+    active = false;
+    el.classList.remove('dragging');
+    if (lock === 'x' && Math.abs(dx) > 60) {
+      el.style.transform = ''; el.style.opacity = '';
+      go(dx < 0 ? 1 : -1);
+      navigator.vibrate?.(8);
+    } else {
+      el.classList.add('snap');
+      el.style.transform = ''; el.style.opacity = '';
+    }
+    lock = null; dx = 0;
+  };
+  el.addEventListener('touchend', end);
+  el.addEventListener('touchcancel', end);
 }
 
 function openFilters(onChange) {

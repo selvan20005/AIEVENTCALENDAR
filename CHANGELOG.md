@@ -3,6 +3,12 @@
 All notable changes. Versions follow [SemVer](https://semver.org); each release is a git tag `vX.Y.Z`.
 Weekly data refreshes are committed as `data: weekly AI events refresh …` and don't bump the version.
 
+## v1.1.0 — 2026-11-03
+- Header refresh button: re-pulls the live events feed + app update, toast before and after
+- Pinch-zoom and double-tap zoom disabled (viewport + iOS gesture guard, 16px inputs to stop focus-zoom)
+- Calendar swipe left/right to change month / week / agenda range, with follow-finger drag and slide animation
+- Release script keeps Version header comments in sync
+
 ## v1.0.0 — 2026-11-03
 - Multi-page modular PWA: Calendar, Event detail, My events, Settings, Face ID lock
 - Scheduler views: Month (dots on mobile + day panel), Week time-grid with overlap lanes and now-line, Agenda

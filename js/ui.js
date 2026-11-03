@@ -40,7 +40,10 @@ function mountShell(page) {
   header.innerHTML = `<div class="container">
     <a class="brand" href="index.html"><span class="mark" data-brand="mark"></span><span data-brand="name"></span><span class="tag" data-brand="tagline"></span></a>
     <nav class="nav">${NAV.map(([h, k, l]) => `<a href="${h}" class="${k === page ? 'on' : ''}">${l}</a>`).join('')}</nav>
-    ${hasPasskey() ? `<button class="icon-btn" id="lockBtn" title="Lock now" aria-label="Lock">${I.lock}</button>` : ''}
+    <div class="hdr-actions">
+      <button class="icon-btn" id="refreshBtn" title="Refresh events" aria-label="Refresh events">${I.refresh}</button>
+      ${hasPasskey() ? `<button class="icon-btn" id="lockBtn" title="Lock now" aria-label="Lock">${I.lock}</button>` : ''}
+    </div>
   </div>`;
   document.body.prepend(header);
   const tab = document.createElement('nav');
@@ -51,7 +54,40 @@ function mountShell(page) {
   foot.className = 'foot';
   foot.innerHTML = `<div class="container" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap"><span><span data-brand="name"></span> — <span data-brand="footer"></span></span><span>Times shown in your timezone · data saved on this device</span></div>`;
   document.querySelector('main')?.after(foot);
+  document.getElementById('refreshBtn')?.addEventListener('click', refreshApp);
   document.getElementById('lockBtn')?.addEventListener('click', () => { lock(); location.href = 'login.html?next=' + encodeURIComponent(location.pathname.split('/').pop() + location.search); });
+}
+
+// ---------- refresh: pull latest events feed + app files, then reload ----------
+export async function refreshApp() {
+  const btn = document.getElementById('refreshBtn');
+  btn?.classList.add('spin'); btn && (btn.disabled = true);
+  toast(`${I.refresh}<span>Refreshing events\u2026</span>`, 1500);
+  try {
+    const res = await fetch('data/events.json', { cache: 'reload' });
+    const count = res.ok ? ((await res.json()).events || []).length : null;
+    if ('caches' in window) {
+      for (const k of await caches.keys()) { const c = await caches.open(k); await c.delete('data/events.json', { ignoreSearch: true }); }
+    }
+    const reg = 'serviceWorker' in navigator ? await navigator.serviceWorker.getRegistration() : null;
+    await reg?.update().catch(() => {});
+    try { sessionStorage.setItem('aiec_refreshed', count == null ? 'offline' : String(count)); } catch {}
+  } catch {
+    try { sessionStorage.setItem('aiec_refreshed', 'offline'); } catch {}
+  }
+  location.reload();
+}
+
+// ---------- no pinch / double-tap zoom (iOS ignores user-scalable=no) ----------
+function disableZoom() {
+  ['gesturestart', 'gesturechange', 'gestureend'].forEach(t => document.addEventListener(t, e => e.preventDefault(), { passive: false }));
+  document.addEventListener('touchmove', e => { if (e.touches.length > 1) e.preventDefault(); }, { passive: false });
+  let last = 0;
+  document.addEventListener('touchend', e => {
+    const now = Date.now();
+    if (now - last < 300 && !e.target.closest('input,textarea,select')) e.preventDefault();
+    last = now;
+  }, { passive: false });
 }
 
 // ---------- toasts ----------
@@ -89,6 +125,7 @@ export function openSheet(html, { onClose } = {}) {
 // ---------- boot ----------
 export function boot(page) {
   applyTheme();
+  disableZoom();
   const p = prefs();
   if (page !== 'login' && p.requireAuth && hasPasskey() && !isUnlocked()) {
     location.replace('login.html?next=' + encodeURIComponent(location.pathname.split('/').pop() + location.search));
@@ -106,5 +143,12 @@ export function boot(page) {
     toast(`${I.bell}<span><b style="font-weight:500">${esc(title)}</b> — ${esc(body)}</span> <a href="${esc(url)}">Open</a>`, 6000);
   });
   if (page !== 'login') rescheduleAll();
+  try {
+    const r = sessionStorage.getItem('aiec_refreshed');
+    if (r) {
+      sessionStorage.removeItem('aiec_refreshed');
+      setTimeout(() => toast(r === 'offline' ? 'You\u2019re offline \u2014 showing saved events' : `${I.check}<span>Up to date \u00b7 ${r} live events</span>`), 300);
+    }
+  } catch {}
   return true;
 }
