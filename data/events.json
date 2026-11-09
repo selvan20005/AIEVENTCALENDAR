@@ -1,61 +1,19 @@
 {
- "generatedAt": "2026-11-03T18:10:37.451Z",
+ "generatedAt": "2026-11-09T22:34:47.213Z",
  "window": {
-  "from": "2026-11-03",
-  "to": "2027-02-03"
+  "from": "2026-11-09",
+  "to": "2027-02-09"
  },
  "sources": [
   {
    "name": "confs.tech",
    "url": "https://github.com/tech-conferences/conference-data",
-   "count": 18,
+   "count": 14,
    "trusted": true
   }
  ],
- "count": 14,
+ "count": 12,
  "events": [
-  {
-   "id": "c-ae20b1a796",
-   "title": "AI DevCon NYC",
-   "url": "https://tessl.io/devcon",
-   "org": "tessl.io",
-   "startDate": "2026-11-02",
-   "endDate": "2026-11-04",
-   "format": "hybrid",
-   "city": "Brooklyn, NY",
-   "country": "U.S.A.",
-   "region": "Americas",
-   "topics": [
-    "ml"
-   ],
-   "trusted": true,
-   "source": "confs.tech",
-   "cfpUrl": "https://sessionize.com/ai-native-devcon-nyc-2026",
-   "cfpEndDate": "2026-10-01",
-   "price": "unknown",
-   "desc": "AI DevCon NYC — Brooklyn, NY, U.S.A. and online. Listed on the community-reviewed confs.tech dataset."
-  },
-  {
-   "id": "c-bf3e1aac9d",
-   "title": "The AI Conf",
-   "url": "https://theconf.ai",
-   "org": "theconf.ai",
-   "startDate": "2026-11-03",
-   "endDate": "2026-11-04",
-   "format": "in-person",
-   "city": "Barcelona",
-   "country": "Spain",
-   "region": "Europe",
-   "topics": [
-    "ml"
-   ],
-   "trusted": true,
-   "source": "confs.tech",
-   "cfpUrl": "https://theconf.ai/call-for-papers",
-   "cfpEndDate": "2026-09-30",
-   "price": "unknown",
-   "desc": "The AI Conf — Barcelona, Spain. Listed on the community-reviewed confs.tech dataset."
-  },
   {
    "id": "c-843e53222c",
    "title": "VIC AI Boom",
