@@ -1,40 +1,19 @@
 {
- "generatedAt": "2026-11-09T22:34:47.213Z",
+ "generatedAt": "2026-11-16T22:23:24.619Z",
  "window": {
-  "from": "2026-11-09",
-  "to": "2027-02-09"
+  "from": "2026-11-16",
+  "to": "2027-02-16"
  },
  "sources": [
   {
    "name": "confs.tech",
    "url": "https://github.com/tech-conferences/conference-data",
-   "count": 14,
+   "count": 12,
    "trusted": true
   }
  ],
  "count": 12,
  "events": [
-  {
-   "id": "c-843e53222c",
-   "title": "VIC AI Boom",
-   "url": "https://vicaiboom.com",
-   "org": "vicaiboom.com",
-   "startDate": "2026-11-13",
-   "endDate": "2026-11-13",
-   "format": "in-person",
-   "city": "Melbourne",
-   "country": "Australia",
-   "region": "Asia-Pacific",
-   "topics": [
-    "ml"
-   ],
-   "trusted": true,
-   "source": "confs.tech",
-   "cfpUrl": "https://forms.gle/gRGNcMAqbwxPaYpC6",
-   "cfpEndDate": "2026-10-16",
-   "price": "unknown",
-   "desc": "VIC AI Boom — Melbourne, Australia. Listed on the community-reviewed confs.tech dataset."
-  },
   {
    "id": "c-a42edb6d57",
    "title": "AI Engineering Summit",
@@ -185,6 +164,28 @@
    "cfpEndDate": "2026-08-12",
    "price": "unknown",
    "desc": "AI Coding Summit Berlin Edition — Berlin, Germany. Listed on the community-reviewed confs.tech dataset."
+  },
+  {
+   "id": "c-188b98319b",
+   "title": "AICD Summit",
+   "url": "https://aicommunitydays.ai/events/aicd-summit-2026",
+   "org": "aicommunitydays.ai",
+   "startDate": "2026-12-05",
+   "endDate": "2026-12-06",
+   "format": "in-person",
+   "city": "Tunis",
+   "country": "Tunisia",
+   "region": "Global",
+   "topics": [
+    "business",
+    "community"
+   ],
+   "trusted": true,
+   "source": "confs.tech",
+   "cfpUrl": "",
+   "cfpEndDate": "",
+   "price": "unknown",
+   "desc": "AICD Summit — Tunis, Tunisia. Listed on the community-reviewed confs.tech dataset."
   },
   {
    "id": "c-c69972db19",
