@@ -44,6 +44,21 @@
    "sources": [
     "confs.tech:12"
    ]
+  },
+  {
+   "at": "2026-11-24T00:08:15.829Z",
+   "trigger": "weekly",
+   "window": {
+    "from": "2026-11-24",
+    "to": "2027-02-24"
+   },
+   "ok": true,
+   "count": 7,
+   "added": 0,
+   "removed": 5,
+   "sources": [
+    "confs.tech:7"
+   ]
   }
  ]
 }
